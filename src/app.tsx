@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { css } from "../styled-system/css";
-import { Canvas } from "./canvas";
+import { Canvas } from "~/src/components/canvas";
+import { css } from "~/styled-system/css";
 
 const SIZE = 8;
 const COLORS = [

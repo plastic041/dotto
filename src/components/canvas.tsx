@@ -1,6 +1,6 @@
 import invariant from "tiny-invariant";
-import { css } from "../styled-system/css";
-import { Pixel } from "./components/pixel/pixel";
+import { css } from "../../styled-system/css";
+import { Pixel } from "./pixel/pixel.tsx";
 
 type Art = number[]; // index into COLORS
 
