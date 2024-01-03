@@ -19,7 +19,6 @@ export function Canvas({ size, colors, art }: CanvasProps) {
 	return (
 		<article
 			className={css({
-				display: "flex",
 				p: 4,
 				bgColor: "white",
 				boxShadow: "lg",
@@ -29,10 +28,10 @@ export function Canvas({ size, colors, art }: CanvasProps) {
 			<div
 				className={css({
 					display: "grid",
-					gridTemplateColumns: `repeat(${size}, 1fr)`,
-					width: "400px",
-					height: "400px",
 				})}
+				style={{
+					gridTemplateColumns: `repeat(${size}, 1fr)`,
+				}}
 			>
 				{art.map((colorIndex, i) => {
 					const color = colors[colorIndex];

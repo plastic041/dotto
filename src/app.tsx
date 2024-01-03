@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { css } from "../styled-system/css";
 import { Canvas } from "./canvas";
 
@@ -11,31 +12,20 @@ const COLORS = [
 	"#ff6973",
 ] as const;
 
-// const ART = [
-//   0, 0, 0, 0, 0, 0, 0, 0,
-//   0, 1, 1, 1, 1, 1, 1, 0,
-//   0, 1, 2, 2, 2, 2, 1, 0,
-//   0, 1, 2, 3, 3, 2, 1, 0,
-//   0, 1, 2, 3, 3, 2, 1, 0,
-//   0, 1, 2, 2, 2, 2, 1, 0,
-//   0, 1, 1, 1, 1, 1, 1, 0,
-//   0, 0, 0, 0, 0, 0, 0, 0,
-// ];
-const ART: number[] = `00000000
-01111110
-01222210
-01233210
-01233210
-01222210
-01111110
-00000000
-`
-	.split("\n")
-	.join("")
-	.split("")
-	.map(Number);
+function randomInt(min: number, max: number) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function App() {
+	const [_, render] = useState(0);
+	function rerender() {
+		render((v) => v + 1);
+	}
+
+	const randomArt = Array.from({ length: SIZE * SIZE }, () =>
+		randomInt(0, COLORS.length - 1),
+	);
+
 	return (
 		<div
 			className={css({
@@ -46,8 +36,22 @@ function App() {
 				width: "100vw",
 				bgColor: "gray.200",
 			})}
+			onClick={rerender}
+			onKeyDown={(e) => {
+				console.log(e.key);
+				if (e.key === " ") {
+					rerender();
+				}
+			}}
 		>
-			<Canvas size={SIZE} colors={COLORS} art={ART} />
+			<div
+				className={css({
+					width: "400px",
+					height: "400px",
+				})}
+			>
+				<Canvas size={SIZE} colors={COLORS} art={randomArt} />
+			</div>
 		</div>
 	);
 }
